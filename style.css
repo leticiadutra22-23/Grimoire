@@ -37,6 +37,7 @@ body {
     width: 100%;
     max-width: 800px;
     text-align: center;
+    margin-top: 10%;
   }
   
   /* Definindo o estilo para a imagem centralizada */
@@ -54,8 +55,8 @@ body {
     position: fixed;
     top: -60px;
     width: 100%;
-    height: 60px;
-    background-color: #fff;
+    height: 25%;
+    background-color: #6D7156;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: top 0.3s;
   }
@@ -71,8 +72,13 @@ body {
   }
   
   .navbar__title {
-    font-size: 1.5rem;
-    margin: 0;
+    font-family: 'Avander', sans-serif;
+    font-size: 5.6rem;
+    color: #D8C3B0;
+    text-align: center;
+    margin-top: 15%;
+    margin-left: 30%;
+    margin-right: 0;
   }
   
   .navbar__toggle {
@@ -80,11 +86,12 @@ body {
     background: none;
     cursor: pointer;
     padding: 0;
+    margin-top: 6%;
   }
   
   .navbar__toggle img {
-    width: 24px;
-    height: 24px;
+    width: 30px;
+    height: 25px;
   }
   
   .navbar--visible {
