@@ -4,35 +4,42 @@
     <meta charset="UTF-8">
     <title>Grimoire</title>
     <link rel="stylesheet" href="style.css">
-    <script src="navbar.js"></script>
   </head>
   <body>
     <nav class="navbar" id="navbar">
       <div class="navbar__content">
         <h1 class="navbar__title">GRIMOIRE</h1>
         <button class="navbar__toggle" id="navbar__toggle">
-          <img src="Assets/Menu.png" alt="Menu">
+          <img src="Assets/menu-light.png" alt="Menu">
         </button>
       </div>
     </nav>  
     <div class="container">
-      <div class="row">
-        <div class="col-12">
-          <h1>GRIMOIRE</h1>
-          <div class="menu">
-            <img src="Assets/Menu.png" alt="Menu">
-          </div>
-        </div>
-      </div>
       <div class="row">
         <div class="col-6 offset-3">
           <div class="content">
             <img src="Assets/Banner.png" alt="Poção, varinha e cristal">
           </div>
         </div>
+        <iframe src="Views/grimorio/grimorio.html" width="100%" height="600px"></iframe>
       </div>
     </div>
-    <section id="grimorio"></section>
+
+    <script> 
+      const navbar = document.getElementById('navbar');
+      const navbarToggle = document.getElementById('navbar__toggle');
+      
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 0) {
+          navbar.classList.add('navbar--visible');
+        } else {
+          navbar.classList.remove('navbar--visible');
+        }
+      });
+      
+      navbarToggle.addEventListener('click', () => {
+        navbarToggle.classList.toggle('navbar__toggle--open');
+      });
+    </script>
   </body>
 </html>
-
