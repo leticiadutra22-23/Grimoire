@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Grimorio</title>
+    <link rel="stylesheet" href="/stylesheets/books.css">
+  </head>
+  <body>
+    <script>
+        function scrollHandler() {
+        if (window.scrollY > 500) {
+            document.querySelector('#grid-page').classList.add('show');
+        }
+    }
+    window.addEventListener('scroll', scrollHandler);
+    </script>
+    <div class="col-1">
+        <img class="grid-img" src="/images/books/poções.png">
+        <img class="grid-img" src="/images/books/cristais.png">
+        <img class="grid-img" src="/images/books/magias.png">
+        <img class="grid-img" src="/images/books/ervas.png">
+      </div>       
+  </body>
+</html>
