@@ -9,6 +9,8 @@ var usersRouter = require('./routes/users');
 var moonRouter = require('./routes/moon'); 
 var yearRouter = require('./routes/year');
 var booksRouter = require('./routes/books');
+var loginRouter = require('./routes/login');
+var registerRouter = require('./routes/register');
 
 var app = express();
 
@@ -22,11 +24,24 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Middleware para verificar autenticação
+app.use(function(req, res, next) {
+  var isAuthenticated = false; 
+  if (!isAuthenticated && req.url !== '/login' && req.url !== '/register') {
+    res.redirect('/login');
+  } else {
+    next();
+  }
+});
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/moon', moonRouter);
 app.use('/year', yearRouter); 
-app.use('/books', booksRouter); 
+app.use('/books', booksRouter);
+app.use('/login', loginRouter); 
+app.use('/register', registerRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -35,7 +50,6 @@ app.use(function(req, res, next) {
 
 // error handler
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
@@ -43,5 +57,8 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+var express = require('express');
+var router = express.Router();
+
 
 module.exports = app;
