@@ -1,42 +1,51 @@
-var express = require('express');
-var router = express.Router();
-var bcrypt = require('bcrypt');
-var User = require('../models/user'); 
+const express = require('express');
+const router = express.Router();
+const bcrypt = require('bcrypt');
+const { MongoClient } = require('mongodb');
 
-// GET rota de registro
+const uri = 'mongodb+srv://leleyendev:yWqfXRQkCOxQ5s1b@cluster0.osjg6dw.mongodb.net/';
+const dbName = 'GrimoireData';
+
 router.get('/', function(req, res, next) {
-  res.render('register', { title: 'Cadastro' });
+  res.render('register', { title: 'Cadastro', passwordMismatch: false });
 });
 
-// POST rota de registro
-router.post('/', function(req, res, next) {
-  var username = req.body.username;
-  var password = req.body.password;
-  var witchtype = req.body.witchtype;
+router.post('/', async function(req, res, next) {
+  const { username, password, confpassword, witchtype } = req.body;
 
-  // Gere o hash da senha
-  bcrypt.hash(password, 10, function(err, hash) {
-    if (err) {
-      console.log(err);
-      res.redirect('/register'); 
-    } else {
-      var newUser = new User({
-        username: username,
-        password: hash, 
-        witchtype: witchtype
-      });
+  if (password !== confpassword) {
+    return res.render('register', { title: 'Cadastro', passwordMismatch: true, error: 'As senhas não coincidem' });
+  }
 
-      // Salvando o novo usuário no banco de dados
-      newUser.save(function(err) {
-        if (err) {
-          console.log(err);
-          res.redirect('/register'); 
-        } else {
-          res.redirect('/login');
-        }
-      });
+  try {
+    const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+
+    await client.connect();
+
+    const db = client.db('GrimoireData');
+    const collection = db.collection('users');
+
+    const existingUser = await collection.findOne({ username: username });
+
+    if (existingUser) {
+      return res.render('register', { title: 'Cadastro', passwordMismatch: false, error: 'O nome de usuário já está em uso' });
     }
-  });
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const newUser = {
+      username: username,
+      password: hashedPassword,
+      witchtype: witchtype
+    };
+
+    await collection.insertOne(newUser);
+
+    res.redirect('/login');
+  } catch (error) {
+    console.error('Erro ao registrar usuário: ', error);
+    return res.render('register', { title: 'Cadastro', passwordMismatch: false, error: 'Erro ao cadastrar usuário' });
+  }
 });
 
 module.exports = router;

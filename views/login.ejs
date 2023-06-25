@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
     <link rel="icon" href="favicon.ico" type="/images/x-icon">
     <link rel="stylesheet" href="stylesheets/login.css">
-    <title>LOGIN</title>
+    <title>Login</title>
 </head>
 <body>
   <div class="container-wrapper">
@@ -17,6 +17,10 @@
 
             <label for="password">Senha:</label>
             <input type="password" id="password" name="password" required>
+
+          <% if (error) { %>
+  <p class="error-message"><%= error %></p>
+<% } %>
 
             <button type="submit">Entrar</button>
         </form>

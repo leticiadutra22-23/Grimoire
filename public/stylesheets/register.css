@@ -27,8 +27,8 @@ body {
   }
 
         .container {
-            width: 300px;
-            height: 500px;
+            width: 350px;
+            height: 600px;
             padding: 20px;
             background-color: #D8C3B0;
             border: 1px solid #ccc;
@@ -94,6 +94,7 @@ form {
 }
 
 label {
+    font-family: 'EBGaramondBold', sans-serif;
     color: #6D7156;
     display: block;
     margin-bottom: 8px;
@@ -101,7 +102,15 @@ label {
     text-align: center; 
 }
 
-input[type="text"], input[type="password"] {
+a {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  color: #6D7156;
+}
+
+input[type="text"], input[type="password"], input[type="placeholder"] {
+    font-family: 'EBGaramond', sans-serif;
     padding: 8px;
     border-radius: 20px;
     border: 1px solid #cccccc;

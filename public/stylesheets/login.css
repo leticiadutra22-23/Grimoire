@@ -99,6 +99,13 @@ a {
   color: #F7D1CD;
 }
 
+p {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+  color: #F7D1CD;
+}
+
 label {
     color: #ffff;
     display: block;
