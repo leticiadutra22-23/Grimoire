@@ -69,6 +69,19 @@ body {
     text-align: center;
     margin-top: 20px;
   }
+
+span {
+    font-family: "EBGaramond", serif;
+    font-size: 18px;
+    color: #F5F3E5;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.name {
+  font-family: "EBGaramondBold", serif;
+  font-size: 20px;
+}
   /* Definindo o estilo para o símbolo de menu */
   .menu {
     position: absolute;
