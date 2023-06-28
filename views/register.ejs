@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="favicon.ico" type="/images/x-icon">
+  <link rel="stylesheet" href="stylesheets/register.css">
+  <title>CADASTRO</title>
+</head>
+<body>
+  <div class="container-wrapper">
+    <h1>GRIMOIRE</h1>
+    <div class="container">
+      <h3>CADASTRO</h3>
+      <form action="/register" method="POST">
+        <label for="username">Nome de usuário:</label>
+        <input type="text" id="username" name="username" required>
+
+        <label for="password">Senha:</label>
+        <input type="password" id="password" name="password" required>
+
+        <label for="confpassword">Confirme a senha:</label>
+        <input type="password" id="confpass" name="confpassword" required>
+
+        <label for="witchtype">Que tipo de bruxa você é?</label>
+        <input type="text" id="witchtype" name="witchtype" placeholder="Bruxa natural..." required>
+
+        <% if (passwordMismatch) { %>
+        <p class="error-message">Senhas não coincidem</p>
+      <% } %>
+
+        <button type="submit">Cadastrar</button>
+      </form>
+      <a href="/login">Voltar para o login</a> 
+    </div>
+  </div>
+</body>
+</html>

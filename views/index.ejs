@@ -1,63 +1,181 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <link rel="icon" href="favicon.ico" type="/images/x-icon">
-    <title>Grimoire</title>
-    <link rel="stylesheet" href="stylesheets/style.css">
-  </head>
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="favicon.ico" type="/images/x-icon">
+  <title>Grimoire</title>
+  <link rel="stylesheet" href="stylesheets/style.css">
+  <style>
+    .menu {
+      position: relative;
+      display: inline-block;
+    }
 
-  <body>
-    <nav class="navbar" id="navbar">
-      <div class="navbar__content">
-        <h1 class="navbar__title">GRIMOIRE</h1>
-        <button class="navbar__toggle" id="navbar__toggle">
-          <img src="/images/menu-light.png" alt="Menu">
-        </button>
-      </div>
-    </nav>  
-    <div class="container">
-      <div class="row">
-        <div class="col-6 offset-3">
-          <div class="content">
-            <img src="images/Banner.png" alt="Poção, varinha e cristal">
-          </div>
+    .dropdown {
+      display: inline-block;
+      position: absolute;
+      z-index: 1;
+      background-color: #6D7156;
+      padding: 50px;
+      font-family: "EBGaramond", serif;
+      font-size: 18px;
+    }
+
+    .menu:hover .dropdown,
+    .dropdown:hover {
+      display: block;
+    }
+
+    .dropdown img {
+      width: 40px;
+      height: 80px;
+      cursor: default;
+    }
+
+    .dropdown span {
+      display: block;
+      margin-bottom: 10px;
+      cursor: default;
+    }
+
+    .dropdown a {
+      display: block;
+      margin-bottom: 5px;
+      text-decoration: none;
+      color: #F5F3E5;
+    }
+
+    .dropdown button {
+      display: block;
+      margin-top: 10px;
+      padding: 5px 10px;
+      background-color: #f44336;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+
+    .dropdown button:hover {
+      background-color: #d32f2f;
+    }
+
+    .menu:hover .label {
+      background-color: #f9f9f9;
+    }
+
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      background-color: #6D7156;
+      font-family: "EBGaramond", serif;
+      font-size: 18px;
+  }
+
+  li a {
+    display: block;
+    color: #000;
+    padding: 8px 16px;
+    text-decoration: none;
+  }
+
+  li a.active {
+    background-color: #B392AC;
+    color: #F5F3E5;
+  }
+
+  li a:hover:not(.active) {
+    color: #D8C3B0;
+    background-color: #958E84;
+    
+  }
+    
+  </style>
+</head>
+
+<body>
+<nav class="navbar" id="navbar">
+  <div class="navbar__content">
+    <h1 class="navbar__title">GRIMOIRE</h1>
+    <button class="navbar__toggle" id="navbar__toggle">
+      <div class="menu">
+        <img src="/images/menu-light.png" alt="Menu" onmouseover="showDropdown()" onmouseout="hideDropdown()">
+        <div class="dropdown" id="dropdown" onmouseover="showDropdown()" onmouseout="hideDropdown()">
+          <img src="/images/Icon.png" alt="Profile Picture">
+          <span class="name"><%= user.username %></span>
+          <span><%= user.witchtype %></span>
+          <ul>
+            <li><a class="active" href="/">Início</a></li>
+            <li><a href="#books">Seu Grimório</a></li>
+          </ul>
+          <button onclick="logout()">Logout</button>
         </div>
-        <iframe src="/books" class="iframe-grimorio"></iframe>
-        <iframe src="/moon" class="iframe-lua"></iframe>
-        <iframe src="/year" class="iframe-grimorio"></iframe>
+      </div>
+    </button>
+  </div>
+</nav>
+<div class="container">
+  <div class="row">
+    <div class="col-6 offset-3">
+      <div class="content">
+        <img src="images/Banner.png" alt="Poção, varinha e cristal">
       </div>
     </div>
+    <iframe id = books src="/books" class="iframe-grimorio"></iframe>
+  </div>
+</div>
 
-    <script> 
-      const navbar = document.getElementById('navbar');
-      const navbarToggle = document.getElementById('navbar__toggle');
-      
-      window.addEventListener('scroll', () => {
-        if (window.pageYOffset > 0) {
-          navbar.classList.add('navbar--visible');
-        } else {
-          navbar.classList.remove('navbar--visible');
-        }
-      });
-      
-      navbarToggle.addEventListener('click', () => {
-        navbarToggle.classList.toggle('navbar__toggle--open');
-      });
-    </script>
-    <footer>
-      <div class="footer-content">
-      <h3>GRIMOIRE</h3>
-      <p>Informações reservadas à
-        VIOLETA, Gabi. Naturalmente Bruxa. 1. ed. São Paulo: DarkSide Books, 2019.</p>
-      <ul class="socials">
-        <li><a href='https://github.com/leticiadutra22-23'><img src="/images/github.png" width="40px" height="40px"></a></li>
-        <li><a href='https://www.linkedin.com/in/let%C3%ADcia-dutra-7375411b2/'><img src="/images/linkedin.png" width="40px" height="40px"></a></li>
-      </ul>
-      </div>
-      <div class="footer-bottom">
-        <p>copyright &copy;2023 Grimoire. Designed by <span>Letícia Dutra</span></p>
-      </div>
-    </footer>  
-  </body>
+<script>
+  const navbar = document.getElementById('navbar');
+  const navbarToggle = document.getElementById('navbar__toggle');
+
+  window.addEventListener('scroll', () => {
+    if (window.pageYOffset > 0) {
+      navbar.classList.add('navbar--visible');
+    } else {
+      navbar.classList.remove('navbar--visible');
+    }
+  });
+
+  navbarToggle.addEventListener('click', () => {
+    navbarToggle.classList.toggle('navbar__toggle--open');
+  });
+
+  document.getElementById('books').addEventListener('load', function() {
+    const booksLink = document.getElementById('books-link');
+    const iframe = document.getElementById('books');
+
+    if (iframe.contentWindow.location.href.includes('/books')) {
+      booksLink.classList.add('active');
+    } else {
+      booksLink.classList.remove('active');
+    }
+  });
+
+  function showDropdown() {
+    document.getElementById('dropdown').style.display = 'block';
+  }
+
+  function hideDropdown() {
+    document.getElementById('dropdown').style.display = 'none';
+  }
+
+  function logout() {
+    // Implemente a lógica para fazer logout aqui
+  }
+</script>
+<footer>
+  <div class="footer-content">
+    <h3>GRIMOIRE</h3>
+    <p>Informações reservadas à VIOLETA, Gabi. Naturalmente Bruxa. 1. ed. São Paulo: DarkSide Books, 2019.</p>
+    <ul class="socials">
+      <li><a href='https://github.com/leticiadutra22-23'><img src="/images/github.png" width="40px" height="40px"></a></li>
+      <li><a href='https://www.linkedin.com/in/let%C3%ADcia-dutra-7375411b2/'><img src="/images/linkedin.png" width="40px" height="40px"></a></li>
+    </ul>
+  </div>
+  <div class="footer-bottom">
+    <p>copyright &copy;2023 Grimoire. Designed by <span>Letícia Dutra</span></p>
+  </div>
+</footer>
+</body>
 </html>

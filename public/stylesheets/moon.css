@@ -1,5 +1,110 @@
-body {
-    background-image: url('/images/moon/fullmoon.png');
-    background-size: cover;
+.shape-container {
+  position: relative;
+  width: 50%;
+  align-items: center;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.shape-image {
+  width: 100%;
+  display: block;
+  max-width: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+
+.small-image {
+  position: absolute;
+  top: 30px;
+  right: 0;
+  width: 110px;
+  height: 110px;
+}
+
+@font-face {
+    font-family: 'Avander';
+    src: url('/fonts/Avander.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'EBGaramondBold';
+    src: url('/fonts/EBGaramond-Bold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
   }
   
+  @font-face {
+    font-family: 'EBGaramond';
+    src: url('/fonts/EBGaramond-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  h1 {
+    font-family: 'Avander', sans-serif;
+    font-size: 5.6rem;
+    color: #D1B3C4;
+    text-align: left;
+    white-space: nowrap;
+  }
+
+  p {
+  color: white;
+  font-size: 24px;
+  font-family: 'EbGaramond', sans-serif;
+  }
+
+.text-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: left;
+}
+
+.text-overlay {
+  color: white;
+}
+
+.text-container:first-child {
+  margin-bottom: 10px;
+}
+
+.text-container:last-child {
+  margin-top: 10px; 
+}
+.corner-image {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+
+.corner-image img {
+  width: 700px;
+  height: 700px;
+}
+.corner-image-right {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
+
+.corner-image-right img {
+  width: 700px;
+  height: 700px;
+}
+ul {
+  color: #D1B3C4;
+  font-size: 24px;
+  font-family: 'EbGaramond', sans-serif;
+}
+li {
+  color: #D1B3C4;
+  font-size: 24px;
+  font-family: 'EbGaramond', sans-serif;
+}
