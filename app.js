@@ -10,6 +10,10 @@ var indexRouter = require('./routes/index');
 var moonRouter = require('./routes/moon'); 
 var yearRouter = require('./routes/year');
 var booksRouter = require('./routes/books');
+var potionRouter = require('./routes/potions');
+var magicRouter = require('./routes/magias');
+var cristalRouter = require('./routes/cristais');
+var ervRouter = require('./routes/ervas');
 var loginRouter = require('./routes/login');
 var registerRouter = require('./routes/register');
 
@@ -90,6 +94,10 @@ app.use('/', indexRouter);
 app.use('/moon', moonRouter);
 app.use('/year', yearRouter); 
 app.use('/books', booksRouter);
+app.use('/potions', potionRouter);
+app.use('/magias', magicRouter);
+app.use('/cristais', cristalRouter);
+app.use('/ervas', ervRouter);
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
 

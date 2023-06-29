@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Grimorio</title>
+    <link rel="stylesheet" href="stylesheets/grimoire.css">
+  </head>
+  <body>
+    <div class="container">
+      <div class="square-button" onclick="openPopup('addPopup')"></div>
+    </div>
+
+    <div class="popup" id="addPopup">
+      <div class="popup-content">
+        <span class="popup-close" onclick="closePopup('addPopup')">x</span>
+        <img src="/images/cristal.png" alt="Imagem" width="180px" height="170px">
+        <input type="text" class="title-field" placeholder="Título">
+        <textarea id="textInput" placeholder="Digite seu texto"></textarea>
+        <button onclick="saveText()">Salvar</button>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="saved-square" id="savedSquare" onclick="openPopup('viewPopup')">
+        <img src="/images/cristal.png" alt="Imagem" width="180px" height="170px">
+        <p id="savedText">Texto salvo</p>
+      </div>
+    </div>
+
+    <div class="popup" id="viewPopup">
+      <div class="popup-content">
+        <span class="popup-close" onclick="closePopup('viewPopup')">x</span>
+        <img src="image.png" alt="Imagem">
+        <p id="viewText">Texto salvo</p>
+      </div>
+    </div>
+
+    <script>
+      function openPopup(popupId) {
+        const popup = document.getElementById(popupId);
+        popup.classList.add('active');
+      }
+
+      function closePopup(popupId) {
+        const popup = document.getElementById(popupId);
+        popup.classList.remove('active');
+      }
+
+      function saveText() {
+        const textInput = document.getElementById('textInput');
+        const savedSquare = document.getElementById('savedSquare');
+        const savedText = document.getElementById('savedText');
+        const viewText = document.getElementById('viewText');
+
+        savedText.innerText = textInput.value;
+        viewText.innerText = textInput.value;
+
+        closePopup('addPopup');
+        savedSquare.style.display = 'flex';
+      }
+    </script>
+  </body>
+</html>
