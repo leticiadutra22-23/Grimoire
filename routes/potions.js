@@ -19,7 +19,6 @@ router.get('/', async (req, res) => {
     const texts = await userCollection.find().toArray();
     console.log('Documentos encontrados:', texts);
 
-    // Renderizar a página de potions e passar os documentos encontrados
     res.render('potions', { title: 'Potions', texts: texts });
 
     client.close();

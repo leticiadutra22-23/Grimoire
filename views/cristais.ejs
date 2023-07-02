@@ -6,9 +6,27 @@
     <link rel="stylesheet" href="stylesheets/grimoire.css">
   </head>
   <body>
-    <div class="container">
-      <div class="square-button" onclick="openPopup('addPopup')"></div>
+<div class="container">
+  <% for (let i = 0; i < texts.length; i++) {
+    if (texts[i].type === 4) { %>
+    <div class="cell" onclick="openPopup('popup<%= i %>')">
+      <img src="/images/cristal.png" alt="Imagem" width="100px" height="100px">
+      <div class="content">
+        <h3><%= texts[i].title %></h3>
+        <p><%= texts[i].text %></p>
+      </div>
     </div>
+    <div class="popup" id="popup<%= i %>">
+      <div class="popup-content">
+        <span class="popup-close" onclick="closePopup('popup<%= i %>')">x</span>
+        <img class="popup-image" src="/images/cristal.png" alt="Imagem" width="180px" height="170px">
+        <h3><%= texts[i].title %></h3>
+        <p><%= texts[i].text %></p>
+      </div>
+    </div>
+    <% }
+  } %>
+  <div class="square-button" onclick="openPopup('addPopup')"></div>
 
     <div class="popup" id="addPopup">
       <div class="popup-content">
@@ -49,7 +67,7 @@
         const data = {
           title: title,
           text: text,
-          currentRoute: '/potions',
+          currentRoute: '/cristais',
           type: 4
     };
 
@@ -65,8 +83,9 @@
           if (response.ok) {
             console.log('Dados salvos com sucesso!');
             closePopup('addPopup');
+            window.location.reload();
           } else {
-            console.error('Ocorreu um erro ao salvar os dados.');
+          console.error('Ocorreu um erro ao salvar os dados.');
           }
         } catch (error) {
           console.error('Ocorreu um erro na requisição:', error);
