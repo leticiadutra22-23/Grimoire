@@ -142,19 +142,32 @@ button {
             background-color: #958E84;
         }
 
-  input[type="text"],
-      textarea {
-        width: 350px;
-        padding: 10px;
-        border: none;
-        border-radius: 20px;
-        background-color: #BFBFAB;
-        color: #fff;
-        font-family: "EB Garamond", serif;
-      }
+input[type="text"],
+textarea {
+  width: 350px;
+  padding: 10px;
+  border: none;
+  border-radius: 20px;
+  background-color: rgba(191, 191, 171, 0.4);
+  color: #000;
+  font-family: "EB Garamond", serif;
+  margin-top: 10px;
+}
 
-      /* Estilo do text field do título */
-      input[type="text"].title-field {
-        margin-bottom: 20px;
-        width: 100px;
-      }
+input[type="text"]::placeholder,
+textarea::placeholder {
+  opacity: 1; /* Define a opacidade do placeholder como 100% */
+  color: rgba(0, 0, 0, 0.4); /* Define a cor do placeholder como preto */
+}
+
+input[type="text"].title-field {
+  opacity: 0; /* Deixa o campo de texto do título invisível */
+  position: absolute; /* Remove o campo de fluxo normal */
+  top: 50%; /* Centraliza verticalmente */
+  left: 50%; /* Centraliza horizontalmente */
+  transform: translate(-50%, -50%); /* Centraliza vertical e horizontalmente */
+}
+
+input[type="text"].title-field::placeholder {
+  text-align: center; /* Centraliza o texto do placeholder */
+}

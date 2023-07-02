@@ -14,30 +14,15 @@
       <div class="popup-content">
         <span class="popup-close" onclick="closePopup('addPopup')">x</span>
         <img src="/images/potion.png" alt="Imagem" width="180px" height="170px">
-        <input type="text" id="titleInput" placeholder="Título">
-        <textarea id="textInput" placeholder="Digite seu texto"></textarea>
-        <button onclick="saveText()">Salvar</button>
-      </div>
-    </div>
-
-    <div class="container">
-      <div class="saved-square" id="savedSquare" onclick="openPopup('viewPopup')">
-        <img src="/images/potion.png" alt="Imagem">
-        <p id="savedText">Texto salvo</p>
-      </div>
-    </div>
-
-    <div class="popup" id="viewPopup">
-      <div class="popup-content">
-        <span class="popup-close" onclick="closePopup('viewPopup')">x</span>
-        <img src="/images/potion.png" alt="Imagem" width="180px" height="170px">
-        <p id="viewText">Texto salvo</p>
+        <form id="form" action="/save" method="post" onsubmit="saveText(event)">
+          <input type="text" id="titleInput" name="title" placeholder="Insira o título...">
+          <textarea id="textInput" name="text" placeholder="Insira uma descrição..."></textarea>
+          <button type="submit">Salvar</button>
+        </form>
       </div>
     </div>
 
     <script>
-      let isTextSaved = false;
-
       function openPopup(popupId) {
         const popup = document.getElementById(popupId);
         popup.classList.add('active');
@@ -52,69 +37,36 @@
         document.getElementById('textInput').value = '';
       }
 
-      function saveText() {
-  const titleInput = document.getElementById('titleInput');
-  const textInput = document.getElementById('textInput');
-  const savedSquare = document.getElementById('savedSquare');
-  const savedText = document.getElementById('savedText');
-  const viewText = document.getElementById('viewText');
+      async function saveText(event) {
+        event.preventDefault(); // Evita o comportamento padrão de envio do formulário
 
-  if (!isTextSaved) {
-    const textData = {
-      title: titleInput.value,
-      text: textInput.value,
-      type: 'poção'
-    };
+        const form = document.getElementById('form');
+        const title = form.elements.title.value;
+        const text = form.elements.text.value;
 
-    // Fazendo uma solicitação POST para a API do servidor
-    fetch('/api/save-text', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(textData)
-    })
-      .then(response => response.json())
-      .then(data => {
-        console.log('Texto salvo no banco de dados:', data);
+        const data = {
+          title: title,
+          text: text,
+          imageTitle: 'potion.png'
+        };
 
-        savedText.textContent = textInput.value;
-        savedSquare.classList.add('active');
-        isTextSaved = true;
-      })
-      .catch(error => {
-        console.log('Erro ao salvar o texto:', error);
-      });
-  } else {
-    openPopup('viewPopup');
-  }
-}
-      
-          const uri = 'mongodb+srv://leleyendev:yWqfXRQkCOxQ5s1b@cluster0.osjg6dw.mongodb.net/';
-          const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-
-          client.connect(err => {
-            if (err) {
-              console.log(err);
-              return;
-            }
-
-            const collection = client.db('GrimoireData').collection('texts');
-            collection.insertOne(textData, (err, result) => {
-              if (err) {
-                console.log(err);
-              } else {
-                console.log('Texto salvo no banco de dados');
-              }
-              client.close();
-            });
-          });
-
-          savedText.textContent = textInput.value;
-          savedSquare.classList.add('active');
-          isTextSaved = true;
-        } else {
-          openPopup('viewPopup');
+  // Enviar os dados para o servidor (exemplo: usando fetch)
+        try {
+          const response = await fetch('/save', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        });
+          if (response.ok) {
+            console.log('Dados salvos com sucesso!');
+            closePopup('addPopup');
+          } else {
+            console.error('Ocorreu um erro ao salvar os dados.');
+          }
+        } catch (error) {
+          console.error('Ocorreu um erro na requisição:', error);
         }
       }
     </script>

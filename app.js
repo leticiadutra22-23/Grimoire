@@ -16,6 +16,7 @@ var cristalRouter = require('./routes/cristais');
 var ervRouter = require('./routes/ervas');
 var loginRouter = require('./routes/login');
 var registerRouter = require('./routes/register');
+var saveRouter = require('./routes/save');
 
 var app = express();
 // Configuração do middleware de sessão
@@ -100,5 +101,6 @@ app.use('/cristais', cristalRouter);
 app.use('/ervas', ervRouter);
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
+app.use('/save', saveRouter);
 
 module.exports = app;
