@@ -18,6 +18,8 @@
           <input type="text" id="titleInput" name="title" placeholder="Insira o título...">
           <textarea id="textInput" name="text" placeholder="Insira uma descrição..."></textarea>
           <button type="submit">Salvar</button>
+          <input type="hidden" name="type" value="1">
+          <input type="hidden" name="imageTitle" value="potion.png">
         </form>
       </div>
     </div>
@@ -38,7 +40,7 @@
       }
 
       async function saveText(event) {
-        event.preventDefault(); // Evita o comportamento padrão de envio do formulário
+        event.preventDefault();
 
         const form = document.getElementById('form');
         const title = form.elements.title.value;
@@ -47,10 +49,11 @@
         const data = {
           title: title,
           text: text,
-          imageTitle: 'potion.png'
-        };
+          currentRoute: '/potions',
+          type: 1
+    };
 
-  // Enviar os dados para o servidor (exemplo: usando fetch)
+  // Enviar os dados para o servidor
         try {
           const response = await fetch('/save', {
           method: 'POST',

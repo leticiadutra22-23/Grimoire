@@ -5,16 +5,18 @@ const { MongoClient } = require('mongodb');
 // Rota para a página de potions
 router.get('/', async (req, res) => {
   try {
+    const user = req.session.user;
+
     const uri = 'mongodb+srv://leleyendev:yWqfXRQkCOxQ5s1b@cluster0.osjg6dw.mongodb.net/';
     const client = new MongoClient(uri);
     await client.connect();
     console.log('Conexão estabelecida com o banco de dados MongoDB Atlas');
 
-    // Acessar a coleção 'texts'
-    const textsCollection = client.db('GrimoireData').collection(`user_${userId}`);
+    // Acessar a coleção específica do usuário
+    const userCollection = client.db('GrimoireData').collection(`user_${user.username}`);
 
-    // Consultar todos os documentos na coleção 'texts'
-    const texts = await textsCollection.find().toArray();
+    // Consultar todos os documentos na coleção do usuário
+    const texts = await userCollection.find().toArray();
     console.log('Documentos encontrados:', texts);
 
     // Renderizar a página de potions e passar os documentos encontrados

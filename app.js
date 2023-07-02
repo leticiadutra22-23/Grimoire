@@ -36,6 +36,17 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/', indexRouter);
+app.use('/moon', moonRouter);
+app.use('/year', yearRouter); 
+app.use('/books', booksRouter);
+app.use('/potions', potionRouter);
+app.use('/magias', magicRouter);
+app.use('/cristais', cristalRouter);
+app.use('/ervas', ervRouter);
+app.use('/login', loginRouter);
+app.use('/register', registerRouter);
+app.use('/save', saveRouter);
 
 // Middleware para verificar autenticação
 app.use(function(req, res, next) {
@@ -90,17 +101,5 @@ client.connect(err => {
     res.render('error');
   });
 });
-
-app.use('/', indexRouter);
-app.use('/moon', moonRouter);
-app.use('/year', yearRouter); 
-app.use('/books', booksRouter);
-app.use('/potions', potionRouter);
-app.use('/magias', magicRouter);
-app.use('/cristais', cristalRouter);
-app.use('/ervas', ervRouter);
-app.use('/login', loginRouter);
-app.use('/register', registerRouter);
-app.use('/save', saveRouter);
 
 module.exports = app;
