@@ -1,0 +1,271 @@
+/* Definindo a largura e as cores da barra de rolagem */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #735D78;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #D8C3B0;
+}
+
+/* Definindo a largura da thumb quando estiver hover */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #735D78;
+  width: 12px;
+}
+
+/* Removendo a barra de rolagem horizontal */
+::-webkit-scrollbar-horizontal {
+  display: none;
+}
+
+/* Define o estilo para o corpo da página */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #D8C3B0;
+  justify-content: center;
+}
+
+@font-face {
+  font-family: 'Avander';
+  src: url('/fonts/Avander.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'EBGaramondBold';
+  src: url('/fonts/EBGaramond-Bold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'EBGaramond';
+  src: url('/fonts/EBGaramond-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.container .cell {
+  margin: 5%;
+}
+
+.cell {
+  width: 300px;
+  height: 150px;
+  margin: 2% 1%;
+  border-radius: 20px;
+  background-color: #F5F3E5;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.cell img {
+  width:150px;
+  height: 150px;
+  margin-right: 10px;
+}
+
+.cell {
+  position: relative; /* Adiciona posicionamento relativo à célula */
+  cursor: pointer;
+}
+
+.cell .content {
+  position: absolute; /* Adiciona posicionamento absoluto ao conteúdo */
+  top: 0; /* Alinha o conteúdo no topo da célula */
+  left: 0; /* Alinha o conteúdo à esquerda da célula */
+  width: 50%; /* Define a largura do conteúdo como 100% da célula */
+  height: 100%; /* Define a altura do conteúdo como 100% da célula */
+  display: flex; /* Aplica flexbox para alinhar verticalmente */
+  flex-direction: column; /* Alinha os elementos verticalmente */
+  align-content: left;
+  box-sizing: border-box; /* Considera a borda e o preenchimento no cálculo do tamanho */
+  overflow: hidden; /* Esconde o conteúdo que excede os limites da célula */
+  text-align: justify;
+  margin-left: 45%;
+}
+
+.square-button {
+  margin: 5%;
+  position: relative;
+  width: 300px;
+  height: 150px;
+  border-radius: 20px;
+  background-color: #6D7156;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.square-button::before {
+  content: '+';
+  font-size: 60px;
+  color: #fff;
+}
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.popup.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.popup-image {
+  margin-top: 200px;
+}
+
+.popup-content {
+  position: relative;
+  width: 400px;
+  height: 400px;
+  border-radius: 20px;
+  background-color: #F5F3E5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  overflow: auto;
+  scrollbar-width: thin; 
+  scrollbar-color: #735D78 #F5F3E5; 
+}
+
+.popup-content::-webkit-scrollbar {
+  width: 10px; /* Largura da barra de rolagem */
+}
+
+.popup-content::-webkit-scrollbar-thumb {
+  background-color: #735D78; /* Cor do thumb */
+  border-radius: 5px; /* Raio de borda do thumb */
+}
+
+.popup-content::-webkit-scrollbar-track {
+  background-color: #F5F3E5; /* Cor da track */
+}
+
+.popup-content .text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 10;
+  -webkit-box-orient: vertical;
+  text-align: justify;
+}
+
+.popup-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  color: #6D7156;
+  cursor: pointer;
+}
+
+.saved-square {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  border-radius: 20px;
+  background-color: #6D7156;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.saved-square img {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 10px;
+}
+
+.saved-square p {
+  margin: 0;
+  color: #fff;
+  text-align: center;
+  padding: 0 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+button {
+  padding: 8px;
+  background-color: #6D7156;
+  color: #FFFFFF;
+  border: none;
+  cursor: pointer;
+  font-family: 'EBGaramondBold', sans-serif;
+  border-radius: 20px;
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #958E84;
+}
+
+input[type="text"],
+textarea {
+  width: 350px;
+  padding: 10px;
+  border: none;
+  border-radius: 20px;
+  background-color: rgba(191, 191, 171, 0.4);
+  color: #000;
+  font-family: "EB Garamond", serif;
+  margin-top: 10px;
+}
+
+input[type="text"]::placeholder,
+textarea::placeholder {
+  opacity: 1; /* Define a opacidade do placeholder como 100% */
+  color: rgba(0, 0, 0, 0.4); /* Define a cor do placeholder como preto */
+}
+
+input[type="text"].title-field {
+  opacity: 0; /* Deixa o campo de texto do título invisível */
+  position: absolute; /* Remove o campo de fluxo normal */
+  top: 50%; /* Centraliza verticalmente */
+  left: 50%; /* Centraliza horizontalmente */
+  transform: translate(-50%, -50%); /* Centraliza vertical e horizontalmente */
+}
+
+input[type="text"].title-field::placeholder {
+  text-align: center; /* Centraliza o texto do placeholder */
+}

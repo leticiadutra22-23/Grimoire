@@ -10,8 +10,13 @@ var indexRouter = require('./routes/index');
 var moonRouter = require('./routes/moon'); 
 var yearRouter = require('./routes/year');
 var booksRouter = require('./routes/books');
+var potionRouter = require('./routes/potions');
+var magicRouter = require('./routes/magias');
+var cristalRouter = require('./routes/cristais');
+var ervRouter = require('./routes/ervas');
 var loginRouter = require('./routes/login');
 var registerRouter = require('./routes/register');
+var saveRouter = require('./routes/save');
 
 var app = express();
 // Configuração do middleware de sessão
@@ -31,6 +36,17 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/', indexRouter);
+app.use('/moon', moonRouter);
+app.use('/year', yearRouter); 
+app.use('/books', booksRouter);
+app.use('/potions', potionRouter);
+app.use('/magias', magicRouter);
+app.use('/cristais', cristalRouter);
+app.use('/ervas', ervRouter);
+app.use('/login', loginRouter);
+app.use('/register', registerRouter);
+app.use('/save', saveRouter);
 
 // Middleware para verificar autenticação
 app.use(function(req, res, next) {
@@ -85,12 +101,5 @@ client.connect(err => {
     res.render('error');
   });
 });
-
-app.use('/', indexRouter);
-app.use('/moon', moonRouter);
-app.use('/year', yearRouter); 
-app.use('/books', booksRouter);
-app.use('/login', loginRouter);
-app.use('/register', registerRouter);
 
 module.exports = app;
