@@ -48,7 +48,7 @@
   h1 {
     font-family: 'Avander', sans-serif;
     font-size: 5.6rem;
-    color: #D1B3C4;
+    color: white;
     text-align: left;
     white-space: nowrap;
   }
@@ -99,12 +99,12 @@
   height: 700px;
 }
 ul {
-  color: #D1B3C4;
+  color: white;
   font-size: 24px;
   font-family: 'EbGaramond', sans-serif;
 }
 li {
-  color: #D1B3C4;
+  color: white;
   font-size: 24px;
   font-family: 'EbGaramond', sans-serif;
 }
