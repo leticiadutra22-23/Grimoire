@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Grimorio</title>
+    <link rel="stylesheet" href="stylesheets/grimoire.css">
+  </head>
+  <body>
+<div class="container">
+  <% for (let i = 0; i < texts.length; i++) {
+    if (texts[i].type === 3) { %>
+    <div class="cell" onclick="openPopup('popup<%= i %>')">
+      <img src="/images/erva.png" alt="Imagem" width="100px" height="100px">
+      <div class="content">
+        <h3><%= texts[i].title %></h3>
+        <p><%= texts[i].text %></p>
+      </div>
+    </div>
+    <div class="popup" id="popup<%= i %>">
+      <div class="popup-content">
+        <span class="popup-close" onclick="closePopup('popup<%= i %>')">x</span>
+        <img class="popup-image" src="/images/erva.png" alt="Imagem" width="180px" height="170px">
+        <h3><%= texts[i].title %></h3>
+        <p><%= texts[i].text %></p>
+      </div>
+    </div>
+    <% }
+  } %>
+  <div class="square-button" onclick="openPopup('addPopup')"></div>
+
+    <div class="popup" id="addPopup">
+      <div class="popup-content">
+        <span class="popup-close" onclick="closePopup('addPopup')">x</span>
+        <img src="/images/erva.png" alt="Imagem" width="180px" height="170px">
+        <form id="form" action="/save" method="post" onsubmit="saveText(event)">
+          <input type="text" id="titleInput" name="title" placeholder="Insira o título...">
+          <textarea id="textInput" name="text" placeholder="Insira uma descrição..."></textarea>
+          <button type="submit">Salvar</button>
+          <input type="hidden" name="type" value="3">
+          <input type="hidden" name="imageTitle" value="potion.png">
+        </form>
+      </div>
+    </div>
+
+    <script>
+      function openPopup(popupId) {
+        const popup = document.getElementById(popupId);
+        popup.classList.add('active');
+      }
+
+      function closePopup(popupId) {
+        const popup = document.getElementById(popupId);
+        popup.classList.remove('active');
+
+        // Limpar os campos do formulário
+        document.getElementById('titleInput').value = '';
+        document.getElementById('textInput').value = '';
+      }
+
+      async function saveText(event) {
+        event.preventDefault();
+
+        const form = document.getElementById('form');
+        const title = form.elements.title.value;
+        const text = form.elements.text.value;
+
+        const data = {
+          title: title,
+          text: text,
+          currentRoute: '/ervas',
+          type: 3
+    };
+
+  // Enviar os dados para o servidor
+        try {
+          const response = await fetch('/save', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        });
+          if (response.ok) {
+            console.log('Dados salvos com sucesso!');
+            closePopup('addPopup');
+            window.location.reload();
+          } else {
+          console.error('Ocorreu um erro ao salvar os dados.');
+          }
+        } catch (error) {
+          console.error('Ocorreu um erro na requisição:', error);
+        }
+      }
+    </script>
+  </body>
+</html>

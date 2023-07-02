@@ -8,9 +8,9 @@
   <body>
 <div class="container">
   <% for (let i = 0; i < texts.length; i++) {
-    if (texts[i].type === 2) { %>
+    if (texts[i].type === 1) { %>
     <div class="cell" onclick="openPopup('popup<%= i %>')">
-      <img src="/images/magic.png" alt="Imagem" width="100px" height="100px">
+      <img src="/images/potion.png" alt="Imagem" width="100px" height="100px">
       <div class="content">
         <h3><%= texts[i].title %></h3>
         <p><%= texts[i].text %></p>
@@ -19,7 +19,7 @@
     <div class="popup" id="popup<%= i %>">
       <div class="popup-content">
         <span class="popup-close" onclick="closePopup('popup<%= i %>')">x</span>
-        <img class="popup-image" src="/images/magic.png" alt="Imagem" width="180px" height="170px">
+        <img class="popup-image" src="/images/potion.png" alt="Imagem" width="180px" height="170px">
         <h3><%= texts[i].title %></h3>
         <p><%= texts[i].text %></p>
       </div>
@@ -31,12 +31,12 @@
     <div class="popup" id="addPopup">
       <div class="popup-content">
         <span class="popup-close" onclick="closePopup('addPopup')">x</span>
-        <img src="/images/magic.png" alt="Imagem" width="180px" height="170px">
+        <img src="/images/potion.png" alt="Imagem" width="180px" height="170px">
         <form id="form" action="/save" method="post" onsubmit="saveText(event)">
           <input type="text" id="titleInput" name="title" placeholder="Insira o título...">
           <textarea id="textInput" name="text" placeholder="Insira uma descrição..."></textarea>
           <button type="submit">Salvar</button>
-          <input type="hidden" name="type" value="2">
+          <input type="hidden" name="type" value="1">
           <input type="hidden" name="imageTitle" value="potion.png">
         </form>
       </div>
@@ -67,8 +67,8 @@
         const data = {
           title: title,
           text: text,
-          currentRoute: '/magias',
-          type: 2
+          currentRoute: '/potions',
+          type: 1
     };
 
   // Enviar os dados para o servidor

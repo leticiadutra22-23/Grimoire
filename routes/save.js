@@ -1,10 +1,14 @@
 const express = require('express');
+const session = require('express-session');
 const router = express.Router();
 const { MongoClient } = require('mongodb');
 
-// Rota para a página de potions
-router.get('/', async (req, res) => {
+// Rota para salvar um novo texto
+router.post('/', async (req, res) => {
   try {
+    const { title, text, currentRoute } = req.body;
+
+    // Obtém o usuário da sessão 
     const user = req.session.user;
 
     const uri = 'mongodb+srv://leleyendev:yWqfXRQkCOxQ5s1b@cluster0.osjg6dw.mongodb.net/';
@@ -12,18 +16,19 @@ router.get('/', async (req, res) => {
     await client.connect();
     console.log('Conexão estabelecida com o banco de dados MongoDB Atlas');
 
-    // Acessar a coleção específica do usuário
+    // Acessa a coleção específica do usuário
     const userCollection = client.db('GrimoireData').collection(`user_${user.username}`);
 
-    // Consultar todos os documentos na coleção do usuário
-    const texts = await userCollection.find().toArray();
-    console.log('Documentos encontrados:', texts);
+    const type = req.body.type;
 
-    
-    res.render('cristais', { title: 'Cristais', texts: texts });
+    // Insere um novo documento na coleção do usuário
+    const result = await userCollection.insertOne({ title: title, text: text, type: type });
+    console.log('Novo documento inserido:', result.insertedId);
 
     client.close();
     console.log('Conexão encerrada com o banco de dados MongoDB Atlas');
+
+    res.redirect(currentRoute);
   } catch (error) {
     console.error('Erro ao conectar ao banco de dados MongoDB Atlas', error);
     res.status(500).send('Erro ao conectar ao banco de dados');

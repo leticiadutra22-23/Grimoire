@@ -19,8 +19,7 @@ router.get('/', async (req, res) => {
     const texts = await userCollection.find().toArray();
     console.log('Documentos encontrados:', texts);
 
-    
-    res.render('cristais', { title: 'Cristais', texts: texts });
+    res.render('potions', { title: 'Potions', texts: texts });
 
     client.close();
     console.log('Conexão encerrada com o banco de dados MongoDB Atlas');
